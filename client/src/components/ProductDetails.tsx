@@ -21,7 +21,7 @@ export default function ProductDetails({product}: ProductDetailsProps) {
                 {isAvailable ? 'Disponible' : 'No Disponible'}
             </td>
             <td className="p-3 text-lg text-gray-800 ">
-            
+                
             </td>
         </tr> 
     )
