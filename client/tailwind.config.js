@@ -14,7 +14,8 @@ export default {
         'add': '#d0f501',
         'header-bg': '#0d0d13',
         'error': '#ec0358',
-        'bg-input': '#f1f5f9'
+        'bg-input': '#f1f5f9',
+        'add-product': '#64748b'
       },
     },
   },

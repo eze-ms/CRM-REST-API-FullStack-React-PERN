@@ -7,7 +7,7 @@ export const getProducts = async (req: Request, res: Response) => {
         // Realiza una consulta para obtener todos los productos, ordenados por precio en orden ascendente
         const products = await Product.findAll({
             order: [
-                ['price', 'DESC']  // Ordena los productos por precio en orden ascendente
+                ['id', 'DESC']  // Ordena los productos por precio en orden ascendente
             ],
             attributes: {exclude: ['createdAt', 'updatedAt']} //* Excluye lo que no queramos recibir 
         })

@@ -1,6 +1,6 @@
 import React from "react"
-import { Link, useLoaderData } from "react-router-dom"
-import { getProducts } from "../services/ProductServices"
+import { ActionFunctionArgs, Link, useLoaderData } from "react-router-dom"
+import { getProducts, updateProductAvailability } from "../services/ProductServices"
 import ProductDetails from "../components/ProductDetails"
 import { Product } from "../types"
 
@@ -8,6 +8,13 @@ import { Product } from "../types"
 export async function loader() {
   const products = await getProducts()
   return products
+}
+
+export async function action({request}: ActionFunctionArgs) {
+  const data = Object.fromEntries(await request.formData())
+  await updateProductAvailability(+data.id)
+  
+  return {}
 }
 
 export default function Products() {
@@ -21,15 +28,15 @@ export default function Products() {
           <h2 className="text-2xl font-bold text-slate-500 mb-4 sm:mb-0">Productos</h2>
           <Link
               to="productos/nuevo"
-              className="rounded-md bg-slate-700 p-3 text-xs font-medium text-white shadow-sm hover:bg-slate-500 tracking-wide"
+              className="rounded-md bg-slate-500 border-2 border-header-bg p-3 text-xs font-medium text-white shadow-sm hover:bg-slate-00 tracking-wide"
           >
               Agregar Producto
           </Link>
       </div>
 
-      <div className="p-2">
+      <div className="p-2 w-full">
         <table className="w-full mt-5 table-auto">
-          <thead className="bg-slate-800 text-white">
+          <thead className="bg-add text-black border-2 border-header-bg">
               <tr>
                   <th className="p-2">Producto</th>
                   <th className="p-2">Precio</th>
@@ -37,7 +44,7 @@ export default function Products() {
                   <th className="p-2">Acciones</th>
               </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
             {products.map(product => (
               <ProductDetails 
                 key={product.id}
